@@ -6,7 +6,7 @@ license="All rights reserved"
 modId="hellfall" 
 version="${file.jarVersion}" 
  # A display name for the mod
-displayName="Example Mod" #mandatory
+displayName="HellFall" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
