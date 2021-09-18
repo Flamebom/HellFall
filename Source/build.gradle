@@ -13,18 +13,6 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
-
-repositories {
-    maven { // JEI
-        url "https://dvs1.progwml6.com/files/maven"
-    }
-    maven { // TOP
-        name 'tterrag maven'
-        url "https://maven.tterrag.com/"
-    }
-}
-
-
 version = '0.1.0'
 group = 'com.flamebom.hellfall' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'hellfall'
@@ -151,8 +139,8 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.17.1-37.0.59'
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
-     //compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-  ///runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") 
+     compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") 
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
     // Examples using mod jars from ./libs
