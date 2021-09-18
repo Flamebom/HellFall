@@ -13,6 +13,18 @@ apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+
+repositories {
+    maven { // JEI
+      name = "Progwml6 maven"
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+      maven {
+    // location of a maven mirror for JEI files, as a fallback
+    name = "ModMaven"
+    url = "https://modmaven.k-4u.nl"
+  }
+}
 version = '0.1.0'
 group = 'com.flamebom.hellfall' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'hellfall'
