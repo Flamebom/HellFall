@@ -6,7 +6,6 @@ import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import static com.flamebom.hellfall.HellFall.MODID;
-
 import com.flamebom.hellfall.items.Kuratsu;
 
 public class Registration {
@@ -16,6 +15,6 @@ public class Registration {
 		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		
 	}
-//	public static final RegistryObject<Kuratsu> KURATSU = ITEMS.register("KURATSU", Kuratsu::new);
+	public static final RegistryObject<Kuratsu> KURATSU = ITEMS.register("kuratsu", Kuratsu::new);
 	
 }
