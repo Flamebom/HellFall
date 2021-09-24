@@ -29,6 +29,30 @@ public class Kuratsu extends SwordItem {
 	public Kuratsu() {
 		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties());
 	}
+	@Override
+	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
+		System.out.println("test");
+		CompoundTag tag = stack.getOrCreateTag();
+		Multimap<Attribute, AttributeModifier> multimap = HashMultimap.create();
+		if (slot == EquipmentSlot.MAINHAND) {
+			multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",tag.getInt("currentdamage") ,
+					AttributeModifier.Operation.ADDITION));
+		}
+		return multimap;
+	}
+
+	@Override
+	public boolean onDroppedByPlayer(ItemStack item, Player player) {
+		CompoundTag tag = item.getOrCreateTag();
+		if (tag.contains("currentdamage")) {
+			tag.putInt("currentdamage", 1+tag.getInt("currentdamage"));
+		} else {
+			tag.putInt("currentdamage", 1);
+		}
+		
+
+		return super.onDroppedByPlayer(item, player);
+	}
 
 	@Override
 	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
@@ -45,25 +69,6 @@ public class Kuratsu extends SwordItem {
 	public MutableComponent getName(ItemStack stack) {
 		return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.DARK_RED);
 	}
-
-	@Override
-	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-		System.out.println("test");
-		Multimap<Attribute, AttributeModifier> multimap = HashMultimap.create();
-		if (slot == EquipmentSlot.MAINHAND) {
-			multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-					10, AttributeModifier.Operation.ADDITION));
-		}
-		return multimap;
-	}
-
-	@Override
-	public boolean onDroppedByPlayer(ItemStack item, Player player) {
-		//CompoundTag tag = item.getOrCreateTag();
-//tag.putInt(getDescriptionId(), 1);
-		return super.onDroppedByPlayer(item, player);
-	}
-
 	@Override
 	public boolean canAttackBlock(BlockState p_43291_, Level p_43292_, BlockPos p_43293_, Player p_43294_) {
 		// TODO Auto-generated method stub
