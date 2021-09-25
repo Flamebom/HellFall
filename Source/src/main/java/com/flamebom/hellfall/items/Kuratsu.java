@@ -1,6 +1,7 @@
 package com.flamebom.hellfall.items;
 
-import java.util.HashMap;
+import java.util.List;
+
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -8,8 +9,8 @@ import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.NbtComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,7 +47,7 @@ public class Kuratsu extends SwordItem {
 	public boolean onDroppedByPlayer(ItemStack item, Player player) {
 		CompoundTag tag = item.getOrCreateTag();
 		if (tag.contains("currentdamage")) {
-			tag.putInt("currentdamage", 1+tag.getInt("currentdamage"));
+			tag.putInt("currentdamage", 10+tag.getInt("currentdamage"));
 		} else {
 			tag.putInt("currentdamage", 1);
 		}
@@ -73,6 +75,11 @@ public class Kuratsu extends SwordItem {
 	public boolean canAttackBlock(BlockState p_43291_, Level p_43292_, BlockPos p_43293_, Player p_43294_) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	@Override
+	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag  flagIn) {
+	
+		tooltip.add(new TranslatableComponent("message.kuratsu" , Integer.toString(stack.getOrCreateTag().getInt("currentdamage"))).withStyle(ChatFormatting.DARK_RED));
 	}
 
 }
