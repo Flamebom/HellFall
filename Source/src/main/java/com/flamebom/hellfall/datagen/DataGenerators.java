@@ -11,10 +11,12 @@ public class DataGenerators {
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
 		if (event.includeServer()) {
-	
+		      generator.addProvider(new Recipes(generator));
 		}
 		if (event.includeClient()) {
 		  	generator.addProvider(new Language(generator));
+            generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
+	        generator.addProvider(new Items(generator, event.getExistingFileHelper()));
 		}
 	}
 }
