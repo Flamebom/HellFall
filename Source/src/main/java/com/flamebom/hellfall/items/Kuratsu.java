@@ -26,6 +26,8 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
+import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 
 public class Kuratsu extends SwordItem {
 
@@ -56,6 +58,7 @@ public class Kuratsu extends SwordItem {
 	public void damageupdater(ItemStack sword, LivingEntity killedEntity, LivingEntity player) {
 		CompoundTag tag = sword.getOrCreateTag();
 		if (killedEntity.getType() == EntityType.SKELETON && killedEntity.isDeadOrDying()) {
+			
 			if (tag.contains("currentdamage")) {
 				tag.putInt("currentdamage", 10 + tag.getInt("currentdamage"));
 			} else {

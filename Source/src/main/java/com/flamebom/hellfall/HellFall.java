@@ -24,7 +24,7 @@ public class HellFall {
 	};
 	public HellFall() {
 	  //  ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
-        //ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG);
+        //ModLoadingContext.get().registerConfig(itModConfig.Type.SERVER, Config.SERVER_CONFIG);
 
        Registration.init();
 
