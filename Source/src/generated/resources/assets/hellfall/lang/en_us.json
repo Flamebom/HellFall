@@ -1,6 +1,7 @@
 {
   "item.hellfall.calamity_core": "Calamity Core",
   "item.hellfall.empty_core": "Empty Core",
+  "item.hellfall.god_fall": "Godfall",
   "item.hellfall.godsend_core": "Godsend Core",
   "item.hellfall.kuratsu": "Kuratsu",
   "message.kuratsu": "Damage mod: +%s "
