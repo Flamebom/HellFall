@@ -16,6 +16,7 @@ public class Language extends LanguageProvider {
 	protected void addTranslations() {
 		add("message.kuratsu","Damage mod: +%s ");
 		addItem(Registration.KURATSU, "Kuratsu");
+		addItem(Registration.GODFALL, "Godfall");
 		addItem(Registration.EMPTY_CORE, "Empty Core");
 		addItem(Registration.GODSEND_CORE, "Godsend Core");
 		addItem(Registration.CALAMITY_CORE, "Calamity Core");
