@@ -25,7 +25,7 @@ public class Items extends ItemModelProvider {
                         Registration.GODFALL.get().getRegistryName().getPath(),
                         new ResourceLocation("item/handheld"),
                         "layer0",
-                       new ResourceLocation(HellFall.MODID, "item/kuratsu"));
+                       new ResourceLocation(HellFall.MODID, "item/godfall"));
                 singleTexture(
                         Registration.CALAMITY_CORE.get().getRegistryName().getPath(),
                         new ResourceLocation("item/generated"),
