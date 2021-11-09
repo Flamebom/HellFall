@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "kuratsu",
-		"particle": "kuratsu"
+		"0": "kuratsu2",
+		"particle": "kuratsu2"
 	},
 	"elements": [
 		{
@@ -605,8 +605,9 @@
 			"scale": [1, 1.51, 1]
 		},
 		"firstperson_righthand": {
-			"translation": [-0.25, 1, 0],
-			"scale": [1, 1.51, 1]
+			"rotation": [5.5, 4, -8],
+			"translation": [1.25, 1, 0],
+			"scale": [0.75, 1.125, 0.75]
 		},
 		"firstperson_lefthand": {
 			"translation": [0.25, 1, 0],
