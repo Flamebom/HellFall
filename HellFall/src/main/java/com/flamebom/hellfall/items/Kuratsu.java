@@ -64,10 +64,10 @@ public class Kuratsu extends SwordItem {
 		if (!player.getMainHandItem().isEmpty()
 				&& player.getMainHandItem().getItem() == this
 				&& player.getAttackStrengthScale(0) == 1) {
-			EntitySword sword = getSword(player, player.getMainHandItem());
-			player.level.addEntity(sword);
-			//wip
-			player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  null, null, 0.4F, 1.4F);
+			EntitySword sword = new EntitySword(player, player.level);
+			player.level.addFreshEntity(sword);
+		
+			//player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  null, null, 0.4F, 1.4F);
 		}
 	}
 
