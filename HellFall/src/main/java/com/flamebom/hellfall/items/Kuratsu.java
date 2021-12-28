@@ -48,9 +48,10 @@ public class Kuratsu extends SwordItem {
 	 * Projectile based off Terrablade code
 	 */
 	private void leftClick(PlayerInteractEvent.LeftClickEmpty evt) {
+		System.out.println("test");
 		if (!evt.getItemStack().isEmpty()
 				&& evt.getItemStack().getItem() == this) {
-			PacketHandler.sendToServer(new PacketLeftClick());
+			trySpawnSword(evt.getPlayer());
 		}
 	}
 
@@ -61,10 +62,11 @@ public class Kuratsu extends SwordItem {
 	}
 
 	public void trySpawnSword(Player player) {
+		CompoundTag tag = player.getMainHandItem().getOrCreateTag();
 		if (!player.getMainHandItem().isEmpty()
 				&& player.getMainHandItem().getItem() == this
 				&& player.getAttackStrengthScale(0) == 1) {
-			EntitySword sword = new EntitySword(player, player.level);
+			EntitySword sword = new EntitySword(player,tag.getInt("currentdamage"));
 			player.level.addFreshEntity(sword);
 		
 			//player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  null, null, 0.4F, 1.4F);
