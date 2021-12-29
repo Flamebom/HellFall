@@ -3,8 +3,8 @@ package com.flamebom.hellfall.network;
 import com.flamebom.hellfall.HellFall;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fmllegacy.network.NetworkRegistry;
-import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 
 /*
 Code from Botania

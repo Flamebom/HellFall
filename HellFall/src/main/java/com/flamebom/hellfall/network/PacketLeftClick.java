@@ -6,7 +6,7 @@ import com.flamebom.hellfall.items.Kuratsu;
 import com.flamebom.hellfall.setup.Registration;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 /*
  From botania github code 
