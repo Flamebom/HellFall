@@ -5,6 +5,7 @@ import java.util.List;
 import com.flamebom.hellfall.HellFall;
 import com.flamebom.hellfall.network.PacketHandler;
 import com.flamebom.hellfall.network.PacketLeftClick;
+import com.flamebom.hellfall.setup.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.realmsclient.dto.RealmsServer.WorldType;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,20 +43,22 @@ public class Kuratsu extends SwordItem {
 	public Kuratsu() {
 		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
 		MinecraftForge.EVENT_BUS.addListener(this::leftClick);
-		MinecraftForge.EVENT_BUS.addListener(this::attackEntity);
+		//MinecraftForge.EVENT_BUS.addListener(this::attackEntity);
 	}
 
-	/*
-	 * Projectile based off Terrablade code
-	 */
+
+	 
 	private void leftClick(PlayerInteractEvent.LeftClickEmpty evt) {
 		System.out.println("test");
+		Player player =evt.getPlayer();
+		player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  ModSounds.bowshot, SoundSource.PLAYERS, 0.4F, 1.4F);
 		if (!evt.getItemStack().isEmpty()
 				&& evt.getItemStack().getItem() == this) {
-			trySpawnSword(evt.getPlayer());
+		//	trySpawnSword(evt.getPlayer());
 		}
 	}
-
+	/*
+	 * Projectile based off Terrablade code
 	private void attackEntity(AttackEntityEvent evt) {
 		if (!evt.getPlayer().level.isClientSide) {
 			trySpawnSword(evt.getPlayer());
@@ -71,7 +75,7 @@ public class Kuratsu extends SwordItem {
 		
 			//player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  null, null, 0.4F, 1.4F);
 		}
-	}
+	}*/
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {

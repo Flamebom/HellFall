@@ -20,9 +20,10 @@ public class PacketLeftClick {
 	}
 
 	public static void handle(PacketLeftClick msg, Supplier<NetworkEvent.Context> ctx) {
+	/*
 		if (ctx.get().getDirection().getReceptionSide().isServer()) {
 			ctx.get().enqueueWork(() -> ((Kuratsu) Registration.KURATSU.get()).trySpawnSword(ctx.get().getSender()));
 		}
-		ctx.get().setPacketHandled(true);
+		ctx.get().setPacketHandled(true);*/
 	}
 }
