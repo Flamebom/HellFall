@@ -126,16 +126,7 @@ minecraft.runs.all {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
- maven {
-    // location of the maven that hosts JEI files
-    name = "Progwml6 maven"
-         url "https://dvs1.progwml6.com/files/maven"
-  }
-  maven {
-    // location of a maven mirror for JEI files, as a fallback
-    name = "ModMaven"
-    url = "https://modmaven.k-4u.nl"
-  }
+  
   maven { // TOP
         url "https://cursemaven.com"
     }
@@ -159,8 +150,8 @@ afterEvaluate {
     }
 }
     // Real mod deobf dependency examples - these get remapped to your current mappings
-   compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
-    implementation fg.deobf("mezz.jei:jei-${jei_version}")
+   compileOnly fg.deobf("curse.maven:jei-238222:3596020:api")
+    implementation fg.deobf("curse.maven:jei-238222:3596020")
   implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
