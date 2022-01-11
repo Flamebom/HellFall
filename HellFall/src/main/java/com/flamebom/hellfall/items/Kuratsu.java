@@ -8,9 +8,11 @@ import com.flamebom.hellfall.network.PacketLeftClick;
 import com.flamebom.hellfall.setup.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ibm.icu.impl.units.UnitsData.Constants;
 import com.mojang.realmsclient.dto.RealmsServer.WorldType;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.SharedConstants;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,56 +44,50 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 public class Kuratsu extends SwordItem {
 
 	public Kuratsu() {
-		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
+		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
+
 		MinecraftForge.EVENT_BUS.addListener(this::leftClick);
-		//MinecraftForge.EVENT_BUS.addListener(this::attackEntity);
+		// MinecraftForge.EVENT_BUS.addListener(this::attackEntity);
 	}
 
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
+		return super.onLeftClickEntity(stack, player, entity);
+	}
 
-	 
 	private void leftClick(PlayerInteractEvent.LeftClickEmpty evt) {
-		System.out.println("test");
-		Player player =evt.getPlayer();
-		player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  ModSounds.bowshot, SoundSource.PLAYERS, 0.4F, 1.4F);
-		if (!evt.getItemStack().isEmpty()
-				&& evt.getItemStack().getItem() == this) {
-		//	trySpawnSword(evt.getPlayer());
-		}
-	}
-	/*
-	 * Projectile based off Terrablade code
-	private void attackEntity(AttackEntityEvent evt) {
-		if (!evt.getPlayer().level.isClientSide) {
-			trySpawnSword(evt.getPlayer());
-		}
-	}
 
-	public void trySpawnSword(Player player) {
-		CompoundTag tag = player.getMainHandItem().getOrCreateTag();
-		if (!player.getMainHandItem().isEmpty()
-				&& player.getMainHandItem().getItem() == this
-				&& player.getAttackStrengthScale(0) == 1) {
-			EntitySword sword = new EntitySword(player,tag.getInt("currentdamage"));
-			player.level.addFreshEntity(sword);
-		
-			//player.level.playSound(null, player.getX(), player.getY(), player.getZ(),  null, null, 0.4F, 1.4F);
+		if (!evt.getItemStack().isEmpty() && evt.getItemStack().getItem() == this) {
+			// trySpawnSword(evt.getPlayer());
 		}
-	}*/
+	}
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-		CompoundTag tag = stack.getOrCreateTag();
+		intialize(stack);
 		Multimap<Attribute, AttributeModifier> multimap = HashMultimap.create();
+
 		if (slot == EquipmentSlot.MAINHAND) {
-			System.out.println(tag.getInt("currentdamage"));
 			multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier",
-					tag.getInt("currentdamage"), AttributeModifier.Operation.ADDITION));
+					getDamageOfSword(stack), AttributeModifier.Operation.ADDITION));
 		}
 		return multimap;
 	}
 
+	public void intialize(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		if (!tag.contains("init")) {
+			tag.putInt("experience", 0);
+			tag.putInt("currentdamage", 6);
+			tag.putInt("sharpness", 10);
+			tag.putBoolean("init", true);
+		}
+
+	}
+
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+
 		if (attacker instanceof Player) {
 			damageupdater(stack, target, attacker);
 		}
@@ -98,20 +95,11 @@ public class Kuratsu extends SwordItem {
 	}
 
 	public void damageupdater(ItemStack sword, LivingEntity killedEntity, LivingEntity player) {
-		CompoundTag tag = sword.getOrCreateTag();
 		if (killedEntity.getType() == EntityType.SKELETON && killedEntity.isDeadOrDying()) {
-
-			if (tag.contains("currentdamage")) {
-				tag.putInt("currentdamage", 10 + tag.getInt("currentdamage"));
-			} else {
-				tag.putInt("currentdamage", 1);
-			}
+			player.level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.bowshot,
+					SoundSource.PLAYERS, 20F, 1F);
+			setXPOfSword(sword, 20);
 		}
-	}
-
-	@Override
-	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker) {
-		return true;
 	}
 
 	@Override
@@ -125,15 +113,37 @@ public class Kuratsu extends SwordItem {
 	}
 
 	@Override
-	public boolean canAttackBlock(BlockState p_43291_, Level p_43292_, BlockPos p_43293_, Player p_43294_) {
-		return true;
-	}
-
-	@Override
 	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flagIn) {
 
 		tooltip.add(new TranslatableComponent("message.kuratsu",
-				Integer.toString(stack.getOrCreateTag().getInt("currentdamage"))).withStyle(ChatFormatting.DARK_RED));
+				Integer.toString(stack.getOrCreateTag().getInt("experience"))).withStyle(ChatFormatting.DARK_RED));
+	}
+
+	public int getDamageOfSword(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		return tag.getInt("currentdamage");
+	}
+
+	public void setDamageOfSword(ItemStack stack, int increase) {
+		CompoundTag tag = stack.getOrCreateTag();
+		tag.putInt("currentdamage", increase + tag.getInt("currentdamage"));
+	}
+
+	public int getXPOfSword(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		return tag.getInt("experience");
+	}
+
+	public void setXPOfSword(ItemStack stack, int increase) {
+		CompoundTag tag = stack.getOrCreateTag();
+
+		int xp = tag.getInt("experience") + increase;
+		if (xp >= 100) {
+			xp = xp % 100;
+			setDamageOfSword(stack, 1 * tag.getInt("sharpness"));
+		}
+		tag.putInt("experience", xp);
+
 	}
 
 }
