@@ -78,7 +78,7 @@ public class Kuratsu extends SwordItem {
 		CompoundTag tag = stack.getOrCreateTag();
 		if (!tag.contains("init")) {
 			tag.putInt("experience", 0);
-			tag.putInt("currentdamage", 6);
+			tag.putInt("currentdamage", 5);
 			tag.putInt("sharpness", 10);
 			tag.putBoolean("init", true);
 		}
