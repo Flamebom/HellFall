@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "hellfall:item/kuratsu"
+    "layer0": "hellfall:item/godfall"
   }
 }
