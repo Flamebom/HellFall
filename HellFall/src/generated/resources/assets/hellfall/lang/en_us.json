@@ -4,5 +4,6 @@
   "item.hellfall.god_fall": "Godfall",
   "item.hellfall.godsend_core": "Godsend Core",
   "item.hellfall.kuratsu": "Kuratsu",
-  "message.kuratsu": "XP:%s/100 "
+  "message.kuratsu.level": "Level:%s",
+  "message.kuratsu.xp": "XP:%s/100 "
 }

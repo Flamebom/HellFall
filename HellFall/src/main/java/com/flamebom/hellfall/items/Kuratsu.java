@@ -1,8 +1,10 @@
 package com.flamebom.hellfall.items;
 
 import java.util.List;
+import java.util.Random;
 
 import com.flamebom.hellfall.HellFall;
+import com.flamebom.hellfall.helpers.EnchantmentCreator;
 import com.flamebom.hellfall.network.PacketHandler;
 import com.flamebom.hellfall.network.PacketLeftClick;
 import com.flamebom.hellfall.setup.ModSounds;
@@ -11,10 +13,15 @@ import com.google.common.collect.Multimap;
 import com.ibm.icu.impl.units.UnitsData.Constants;
 import com.mojang.realmsclient.dto.RealmsServer.WorldType;
 
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.SharedConstants;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -35,6 +42,7 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
@@ -80,6 +88,7 @@ public class Kuratsu extends SwordItem {
 			tag.putInt("experience", 0);
 			tag.putInt("currentdamage", 5);
 			tag.putInt("sharpness", 10);
+			tag.putInt("level", 1);
 			tag.putBoolean("init", true);
 		}
 
@@ -109,14 +118,25 @@ public class Kuratsu extends SwordItem {
 
 	@Override
 	public MutableComponent getName(ItemStack stack) {
-		return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.DARK_RED);
+		if(getLevel(stack)<=10)
+		return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.RED);
+		else {
+			return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.DARK_RED);
+		}
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flagIn) {
 
-		tooltip.add(new TranslatableComponent("message.kuratsu",
+		tooltip.add(new TranslatableComponent("message.kuratsu.exp",
 				Integer.toString(stack.getOrCreateTag().getInt("experience"))).withStyle(ChatFormatting.DARK_RED));
+		tooltip.add(new TranslatableComponent("message.kuratsu.level",
+				Integer.toString(stack.getOrCreateTag().getInt("level"))).withStyle(ChatFormatting.RED));
+	}
+
+	public void setEnchantment(ItemStack stack) {
+		EnchantmentInstance enchant = EnchantmentCreator.addEnchant(getLevel(stack));
+stack.enchant(enchant.enchantment, enchant.level);
 	}
 
 	public int getDamageOfSword(ItemStack stack) {
@@ -127,6 +147,16 @@ public class Kuratsu extends SwordItem {
 	public void setDamageOfSword(ItemStack stack, int increase) {
 		CompoundTag tag = stack.getOrCreateTag();
 		tag.putInt("currentdamage", increase + tag.getInt("currentdamage"));
+	}
+
+	public int getLevel(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		return tag.getInt("level");
+	}
+
+	public void setLevel(ItemStack stack, int increase) {
+		CompoundTag tag = stack.getOrCreateTag();
+		tag.putInt("level", increase + tag.getInt("level"));
 	}
 
 	public int getXPOfSword(ItemStack stack) {
@@ -140,6 +170,8 @@ public class Kuratsu extends SwordItem {
 		int xp = tag.getInt("experience") + increase;
 		if (xp >= 100) {
 			xp = xp % 100;
+			setLevel(stack, 1);
+			setEnchantment(stack);
 			setDamageOfSword(stack, 1 * tag.getInt("sharpness"));
 		}
 		tag.putInt("experience", xp);

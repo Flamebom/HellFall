@@ -14,7 +14,8 @@ public class Language extends LanguageProvider {
 
 	@Override
 	protected void addTranslations() {
-		add("message.kuratsu","XP:%s/100");
+		add("message.kuratsu.xp","XP:%s/100");
+		add("message.kuratsu.level","Level:%s");
 		addItem(Registration.KURATSU, "Kuratsu");
 		addItem(Registration.GODFALL, "Godfall");
 		addItem(Registration.EMPTY_CORE, "Empty Core");
