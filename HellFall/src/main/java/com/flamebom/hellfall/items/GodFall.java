@@ -92,7 +92,7 @@ public class GodFall extends SwordItem {
 	@Override
 	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flagIn) {
 
-		tooltip.add(new TranslatableComponent("message.kuratsu",
+		tooltip.add(new TranslatableComponent("message.wip",
 				Integer.toString(stack.getOrCreateTag().getInt("currentdamage"))).withStyle(ChatFormatting.YELLOW));
 	}
 

@@ -1,27 +1,19 @@
 package com.flamebom.hellfall.items;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.flamebom.hellfall.HellFall;
 import com.flamebom.hellfall.helpers.EnchantmentCreator;
-import com.flamebom.hellfall.network.PacketHandler;
-import com.flamebom.hellfall.network.PacketLeftClick;
 import com.flamebom.hellfall.setup.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.ibm.icu.impl.units.UnitsData.Constants;
-import com.mojang.realmsclient.dto.RealmsServer.WorldType;
 
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.ChatFormatting;
-import net.minecraft.SharedConstants;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -41,12 +33,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.functions.SetEnchantmentsFunction;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class Kuratsu extends SwordItem {
@@ -118,8 +105,8 @@ public class Kuratsu extends SwordItem {
 
 	@Override
 	public MutableComponent getName(ItemStack stack) {
-		if(getLevel(stack)<=10)
-		return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.RED);
+		if (getLevel(stack) <= 10)
+			return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.RED);
 		else {
 			return new TranslatableComponent(this.getDescriptionId(stack)).withStyle(ChatFormatting.DARK_RED);
 		}
@@ -128,7 +115,7 @@ public class Kuratsu extends SwordItem {
 	@Override
 	public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flagIn) {
 
-		tooltip.add(new TranslatableComponent("message.kuratsu.exp",
+		tooltip.add(new TranslatableComponent("message.kuratsu.xp",
 				Integer.toString(stack.getOrCreateTag().getInt("experience"))).withStyle(ChatFormatting.DARK_RED));
 		tooltip.add(new TranslatableComponent("message.kuratsu.level",
 				Integer.toString(stack.getOrCreateTag().getInt("level"))).withStyle(ChatFormatting.RED));
@@ -136,7 +123,13 @@ public class Kuratsu extends SwordItem {
 
 	public void setEnchantment(ItemStack stack) {
 		EnchantmentInstance enchant = EnchantmentCreator.addEnchant(getLevel(stack));
-stack.enchant(enchant.enchantment, enchant.level);
+		Map<Enchantment, Integer> Enchantments = EnchantmentHelper.getEnchantments(stack);
+		if (Enchantments.containsKey(enchant.enchantment)) {
+			Enchantments.put(enchant.enchantment, enchant.level + Enchantments.get(enchant.enchantment));
+			EnchantmentHelper.setEnchantments(Enchantments, stack);
+		} else {
+			stack.enchant(enchant.enchantment, enchant.level);
+		}
 	}
 
 	public int getDamageOfSword(ItemStack stack) {
@@ -171,8 +164,23 @@ stack.enchant(enchant.enchantment, enchant.level);
 		if (xp >= 100) {
 			xp = xp % 100;
 			setLevel(stack, 1);
-			setEnchantment(stack);
-			setDamageOfSword(stack, 1 * tag.getInt("sharpness"));
+			Random random = new Random();
+			int level = getLevel(stack);
+			int cycles = 0;
+			if (level <= 10) {
+				cycles = random.nextInt(0, 3);
+			} else {
+				cycles = random.nextInt(0, level / 5 + 1);
+			}
+			for (int i = 0; i < cycles; i++) {
+				boolean enchant = random.nextBoolean();
+				if (enchant) {
+					setEnchantment(stack);
+				} else {
+					setDamageOfSword(stack, 1 * tag.getInt("sharpness"));
+				}
+			}
+
 		}
 		tag.putInt("experience", xp);
 
