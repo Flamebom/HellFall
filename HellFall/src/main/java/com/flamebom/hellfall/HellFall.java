@@ -9,6 +9,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.flamebom.hellfall.setup.ClientSetup;
+import com.flamebom.hellfall.setup.ModSetup;
 import com.flamebom.hellfall.setup.Registration;
 
 @Mod("hellfall")
@@ -30,8 +32,8 @@ public class HellFall {
 
 
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
-     //   modbus.addListener(ModSetup::init);
+       modbus.addListener(ModSetup::init);
      //   modbus.addListener(ModSetup::onAttributeCreate);
-    //  modbus.addListener(ClientSetup::init);
+    modbus.addListener(ClientSetup::init);
 	}
 }

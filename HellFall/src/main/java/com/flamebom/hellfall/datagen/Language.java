@@ -1,6 +1,7 @@
 package com.flamebom.hellfall.datagen;
 
 import com.flamebom.hellfall.HellFall;
+import com.flamebom.hellfall.client.KeyBindings;
 import com.flamebom.hellfall.setup.Registration;
 
 import net.minecraft.data.DataGenerator;
@@ -21,5 +22,7 @@ public class Language extends LanguageProvider {
 		addItem(Registration.EMPTY_CORE, "Empty Core");
 		addItem(Registration.GODSEND_CORE, "Godsend Core");
 		addItem(Registration.CALAMITY_CORE, "Calamity Core");
+		add(KeyBindings.KEY_CATEGORIES_HELLFALL, "HellFall");
+		add(KeyBindings.KEY_DEFLECT, "Deflect");
 		
 	}}

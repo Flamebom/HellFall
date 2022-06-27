@@ -40,9 +40,6 @@ public class Kuratsu extends SwordItem {
 
 	public Kuratsu() {
 		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
-
-		MinecraftForge.EVENT_BUS.addListener(this::leftClick);
-		// MinecraftForge.EVENT_BUS.addListener(this::attackEntity);
 	}
 
 	@Override
@@ -50,12 +47,7 @@ public class Kuratsu extends SwordItem {
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 
-	private void leftClick(PlayerInteractEvent.LeftClickEmpty evt) {
-
-		if (!evt.getItemStack().isEmpty() && evt.getItemStack().getItem() == this) {
-			// trySpawnSword(evt.getPlayer());
-		}
-	}
+	
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
