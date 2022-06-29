@@ -1,5 +1,6 @@
 package com.flamebom.hellfall.client;
 
+import com.flamebom.hellfall.network.PacketDeflect;
 import com.flamebom.hellfall.setup.Messages;
 
 import net.minecraftforge.client.event.InputEvent;
