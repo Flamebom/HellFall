@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.flamebom.hellfall.setup.ClientSetup;
+import com.flamebom.hellfall.setup.Config;
 import com.flamebom.hellfall.setup.ModSetup;
 import com.flamebom.hellfall.setup.Registration;
 
@@ -29,7 +30,7 @@ public class HellFall {
         //ModLoadingContext.get().registerConfig(itModConfig.Type.SERVER, Config.SERVER_CONFIG);
 
        Registration.init();
-
+Config.register();
 
         IEventBus modbus = FMLJavaModLoadingContext.get().getModEventBus();
        modbus.addListener(ModSetup::init);

@@ -15,8 +15,9 @@ public class Language extends LanguageProvider {
 
 	@Override
 	protected void addTranslations() {
-		add("message.kuratsu.xp","XP:%s/100");
-		add("message.kuratsu.level","Level:%s");
+		add("message.kuratsu.xp", "XP:%s/100");
+		add("message.kuratsu.level", "Level:%s");
+		add("message.wip", "Work in Progress, Not yet implamented");
 		addItem(Registration.KURATSU, "Kuratsu");
 		addItem(Registration.GODFALL, "Godfall");
 		addItem(Registration.EMPTY_CORE, "Empty Core");
@@ -24,5 +25,6 @@ public class Language extends LanguageProvider {
 		addItem(Registration.CALAMITY_CORE, "Calamity Core");
 		add(KeyBindings.KEY_CATEGORIES_HELLFALL, "HellFall");
 		add(KeyBindings.KEY_DEFLECT, "Deflect");
-		
-	}}
+
+	}
+}
