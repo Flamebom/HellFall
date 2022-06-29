@@ -16,6 +16,7 @@ public class Language extends LanguageProvider {
 	@Override
 	protected void addTranslations() {
 		add("message.kuratsu.xp", "XP:%s/100");
+		add("itemGroup.hellfall", "HellFall");
 		add("message.kuratsu.level", "Level:%s");
 		add("message.wip", "Work in Progress, Not yet implamented");
 		addItem(Registration.KURATSU, "Kuratsu");
