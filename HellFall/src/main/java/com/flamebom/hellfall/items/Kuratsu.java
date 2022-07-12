@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.flamebom.hellfall.HellFall;
 import com.flamebom.hellfall.helpers.EnchantmentCreator;
+import com.flamebom.hellfall.setup.ModSetup;
 import com.flamebom.hellfall.setup.ModSounds;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -29,25 +29,23 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStack.TooltipPart;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class Kuratsu extends SwordItem {
 
 	public Kuratsu() {
-		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
+		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(ModSetup.ITEM_GROUP));
+		
 	}
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
 		return super.onLeftClickEntity(stack, player, entity);
 	}
-
-	
 
 	@Override
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
@@ -62,6 +60,7 @@ public class Kuratsu extends SwordItem {
 	}
 
 	public void intialize(ItemStack stack) {
+	
 		CompoundTag tag = stack.getOrCreateTag();
 		if (!tag.contains("init")) {
 			tag.putInt("experience", 0);
@@ -79,6 +78,7 @@ public class Kuratsu extends SwordItem {
 		if (attacker instanceof Player) {
 			damageupdater(stack, target, attacker);
 		}
+		
 		return super.hurtEnemy(stack, target, attacker);
 	}
 
@@ -112,6 +112,8 @@ public class Kuratsu extends SwordItem {
 		tooltip.add(new TranslatableComponent("message.kuratsu.level",
 				Integer.toString(stack.getOrCreateTag().getInt("level"))).withStyle(ChatFormatting.RED));
 	}
+
+
 
 	public void setEnchantment(ItemStack stack) {
 		EnchantmentInstance enchant = EnchantmentCreator.addEnchant(getLevel(stack));

@@ -2,7 +2,7 @@ package com.flamebom.hellfall.items;
 
 import java.util.List;
 
-import com.flamebom.hellfall.HellFall;
+import com.flamebom.hellfall.setup.ModSetup;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -26,13 +26,11 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 
 public class GodFall extends SwordItem {
 
 	public GodFall() {
-		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties().tab(HellFall.ITEM_GROUP));
+		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties().tab(ModSetup.ITEM_GROUP));
 	}
 	
 	@Override
