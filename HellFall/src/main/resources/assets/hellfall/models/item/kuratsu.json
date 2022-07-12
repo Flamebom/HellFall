@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "kuratsu2",
-		"particle": "kuratsu2"
+		"0": "hellfall:item/kuratsu",
+		"particle": "hellfall:item/kuratsu"
 	},
 	"elements": [
 		{

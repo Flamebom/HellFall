@@ -30,7 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class GodFall extends SwordItem {
 
 	public GodFall() {
-		super(Tiers.NETHERITE, 1, -2.8F, new Item.Properties().tab(ModSetup.ITEM_GROUP));
+		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(ModSetup.ITEM_GROUP));
 	}
 	
 	@Override

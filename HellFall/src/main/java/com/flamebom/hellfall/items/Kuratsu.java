@@ -14,11 +14,15 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.block.model.ItemOverride;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -71,7 +75,11 @@ public class Kuratsu extends SwordItem {
 		}
 
 	}
+@Override
+public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
 
+	return super.use(pLevel, pPlayer, pUsedHand);
+}
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 
@@ -89,7 +97,6 @@ public class Kuratsu extends SwordItem {
 			setXPOfSword(sword, 20);
 		}
 	}
-
 	@Override
 	public boolean canBeDepleted() {
 		return false;
