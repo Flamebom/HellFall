@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.flamebom.hellfall.helpers.EnchantmentCreator;
+import com.flamebom.hellfall.setup.ClientSetup;
 import com.flamebom.hellfall.setup.ModSetup;
 import com.flamebom.hellfall.setup.ModSounds;
 import com.google.common.collect.HashMultimap;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.renderer.block.model.ItemOverride;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -48,6 +50,7 @@ public class Kuratsu extends SwordItem {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
+		
 		return super.onLeftClickEntity(stack, player, entity);
 	}
 
@@ -77,8 +80,13 @@ public class Kuratsu extends SwordItem {
 	}
 @Override
 public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-
-	return super.use(pLevel, pPlayer, pUsedHand);
+    ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+    pPlayer.startUsingItem(pUsedHand);
+    return InteractionResultHolder.consume(itemstack);
+}
+@Override
+public int getUseDuration(ItemStack pStack) {
+	return 72000;
 }
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
