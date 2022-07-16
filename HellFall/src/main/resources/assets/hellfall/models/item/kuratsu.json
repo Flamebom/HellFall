@@ -655,11 +655,19 @@
 		}
 	],
 		"overrides": [
-    {
+			{
       "predicate": {
-        "hellfall:blocking":1
+        "hellfall:blocking":0.0
+      },
+      "model": "hellfall:item/kuratsu"
+    },
+    {
+	
+      "predicate": {
+        "hellfall:blocking":1.0
       },
       "model": "hellfall:item/kuratsu_block"
     }
+       
   ]
 }

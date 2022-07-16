@@ -39,6 +39,7 @@ import net.minecraft.world.item.ItemStack.TooltipPart;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 public class Kuratsu extends SwordItem {
@@ -105,6 +106,7 @@ public int getUseDuration(ItemStack pStack) {
 			setXPOfSword(sword, 20);
 		}
 	}
+
 	@Override
 	public boolean canBeDepleted() {
 		return false;
