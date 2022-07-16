@@ -22,7 +22,7 @@ public class ClientSetup {
 						float foo = living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F
 								: 0.0F;
 				
-							System.out.println(foo);
+					
 
 						return foo;
 					});
