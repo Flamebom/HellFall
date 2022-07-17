@@ -19,14 +19,9 @@ public class ClientSetup {
 		event.enqueueWork(() -> {
 			ItemProperties.register(Registration.KURATSU.get(), new ResourceLocation(HellFall.MODID, "blocking"),
 					(stack, level, living, id) -> {
-						float foo = living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F
-								: 0.0F;
-				
-					
 
-						return foo;
+						return living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F;
 					});
 		});
 	}
-
 }

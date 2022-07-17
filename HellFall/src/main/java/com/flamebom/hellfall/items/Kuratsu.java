@@ -41,18 +41,13 @@ import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
 public class Kuratsu extends SwordItem {
 
 	public Kuratsu() {
 		super(Tiers.NETHERITE, 6, -2.8F, new Item.Properties().tab(ModSetup.ITEM_GROUP));
-		
-	}
 
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
-		
-		return super.onLeftClickEntity(stack, player, entity);
 	}
 
 	@Override
@@ -68,9 +63,10 @@ public class Kuratsu extends SwordItem {
 	}
 
 	public void intialize(ItemStack stack) {
-	
+
 		CompoundTag tag = stack.getOrCreateTag();
 		if (!tag.contains("init")) {
+			tag.putBoolean("canDeflect", true);
 			tag.putInt("experience", 0);
 			tag.putInt("currentdamage", 5);
 			tag.putInt("sharpness", 10);
@@ -79,23 +75,26 @@ public class Kuratsu extends SwordItem {
 		}
 
 	}
-@Override
-public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-    ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
-    pPlayer.startUsingItem(pUsedHand);
-    return InteractionResultHolder.consume(itemstack);
-}
-@Override
-public int getUseDuration(ItemStack pStack) {
-	return 72000;
-}
+
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+		ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+		pPlayer.startUsingItem(pUsedHand);
+		return InteractionResultHolder.consume(itemstack);
+	}
+
+	@Override
+	public int getUseDuration(ItemStack pStack) {
+		return 72000;
+	}
+
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
 
 		if (attacker instanceof Player) {
 			damageupdater(stack, target, attacker);
 		}
-		
+
 		return super.hurtEnemy(stack, target, attacker);
 	}
 
@@ -129,8 +128,6 @@ public int getUseDuration(ItemStack pStack) {
 		tooltip.add(new TranslatableComponent("message.kuratsu.level",
 				Integer.toString(stack.getOrCreateTag().getInt("level"))).withStyle(ChatFormatting.RED));
 	}
-
-
 
 	public void setEnchantment(ItemStack stack) {
 		EnchantmentInstance enchant = EnchantmentCreator.addEnchant(getLevel(stack));
