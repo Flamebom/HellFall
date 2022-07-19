@@ -4,6 +4,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 
 import com.flamebom.hellfall.HellFall;
+import com.flamebom.hellfall.data.DeflectEventHandler;
 import com.flamebom.hellfall.data.SkillsEvents;
 
 @Mod.EventBusSubscriber(modid = HellFall.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -31,5 +33,8 @@ public class ModSetup {
 		bus.addGenericListener(Entity.class,SkillsEvents::onAttachCapabilitiesPlayer);
 		bus.addListener(SkillsEvents::onPlayerCloned);
 		bus.addListener(SkillsEvents::onRegisterCapabilities);
+		//bus.addListener(PlayerInteractEvent);
+	
+		
 	}
 }
