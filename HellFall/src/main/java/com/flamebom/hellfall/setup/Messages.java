@@ -25,7 +25,7 @@ public class Messages {
 				.networkProtocolVersion(() -> "1.0").clientAcceptedVersions(s -> true).serverAcceptedVersions(s -> true)
 				.simpleChannel();
 	    INSTANCE = net;
-	     net.messageBuilder(PacketDeflect.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+	     net.messageBuilder(PacketDeflect.class, id(), NetworkDirection.PLAY_TO_SERVER)
          .decoder(PacketDeflect::new)
          .encoder(PacketDeflect::toBytes)
          .consumer(PacketDeflect::handle)

@@ -78,6 +78,7 @@ public class Kuratsu extends SwordItem {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+		
 		ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
 		pPlayer.startUsingItem(pUsedHand);
 		return InteractionResultHolder.consume(itemstack);
