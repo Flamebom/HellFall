@@ -66,7 +66,8 @@ public class Kuratsu extends SwordItem {
 
 		CompoundTag tag = stack.getOrCreateTag();
 		if (!tag.contains("init")) {
-			tag.putBoolean("canDeflect", true);
+			tag.putBoolean("deflecting", false);
+			tag.putFloat("starttime", 0F);
 			tag.putInt("experience", 0);
 			tag.putInt("currentdamage", 5);
 			tag.putInt("sharpness", 10);
@@ -78,8 +79,9 @@ public class Kuratsu extends SwordItem {
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-		
+
 		ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+		setDeflect(itemstack, true);
 		pPlayer.startUsingItem(pUsedHand);
 		return InteractionResultHolder.consume(itemstack);
 	}
@@ -139,6 +141,16 @@ public class Kuratsu extends SwordItem {
 		} else {
 			stack.enchant(enchant.enchantment, enchant.level);
 		}
+	}
+
+	public void setDeflect(ItemStack stack, boolean value) {
+		CompoundTag tag = stack.getOrCreateTag();
+		tag.putBoolean("deflecting", value);
+	}
+
+	public float getStartTimer(ItemStack stack) {
+		CompoundTag tag = stack.getOrCreateTag();
+		return tag.getFloat("starttimer");
 	}
 
 	public int getDamageOfSword(ItemStack stack) {

@@ -8,6 +8,7 @@ import com.flamebom.hellfall.setup.Registration;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,11 +25,11 @@ public class DeflectEventHandler {
 	public static void PlayerDeflect(LivingHurtEvent event) {
 		DamageSource s = event.getSource();
 		Entity e = event.getEntity();
-		if (e instanceof Player && s instanceof EntityDamageSource) {
+		if (e instanceof Player && (s instanceof EntityDamageSource|| s instanceof IndirectEntityDamageSource )) {
 			Player player = (Player) e;
 			ItemStack stack = player.getMainHandItem();
 			if (!stack.isEmpty() && stack.getItem() instanceof Kuratsu) {
-				if (player.getMainHandItem().getTag().getBoolean("canDeflect")) {
+				if (player.getMainHandItem().getTag().getBoolean("deflecting")) {
 					float damage = event.getAmount();
 					damage = damage * 0;
 					event.setAmount(damage);
