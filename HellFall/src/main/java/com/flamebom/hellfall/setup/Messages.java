@@ -1,7 +1,7 @@
 package com.flamebom.hellfall.setup;
 
 import com.flamebom.hellfall.HellFall;
-import com.flamebom.hellfall.network.PacketDeflect;
+import com.flamebom.hellfall.network.PacketInteraction;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -25,10 +25,10 @@ public class Messages {
 				.networkProtocolVersion(() -> "1.0").clientAcceptedVersions(s -> true).serverAcceptedVersions(s -> true)
 				.simpleChannel();
 	    INSTANCE = net;
-	     net.messageBuilder(PacketDeflect.class, id(), NetworkDirection.PLAY_TO_SERVER)
-         .decoder(PacketDeflect::new)
-         .encoder(PacketDeflect::toBytes)
-         .consumer(PacketDeflect::handle)
+	     net.messageBuilder(PacketInteraction.class, id(), NetworkDirection.PLAY_TO_SERVER)
+         .decoder(PacketInteraction::new)
+         .encoder(PacketInteraction::toBytes)
+         .consumer(PacketInteraction::handle)
          .add();
 }
 

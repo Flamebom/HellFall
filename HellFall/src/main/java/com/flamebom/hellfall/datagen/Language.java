@@ -21,11 +21,12 @@ public class Language extends LanguageProvider {
 		add("message.wip", "Work in Progress, Not yet implamented");
 		addItem(Registration.KURATSU, "Kuratsu");
 		addItem(Registration.GODFALL, "Godfall");
+		addItem(Registration.WAS_SPECTRE, "Was Spectre");
 		addItem(Registration.EMPTY_CORE, "Empty Core");
 		addItem(Registration.GODSEND_CORE, "Godsend Core");
 		addItem(Registration.CALAMITY_CORE, "Calamity Core");
 		add(KeyBindings.KEY_CATEGORIES_HELLFALL, "HellFall");
-		add(KeyBindings.KEY_DEFLECT, "Deflect");
+		add(KeyBindings.KEY_WEAPON_INTERACTION, "Weapon Interaction");
 
 	}
 }

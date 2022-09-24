@@ -14,8 +14,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 @Mod.EventBusSubscriber(modid = HellFall.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
 	public static void init(FMLClientSetupEvent event) {
-		MinecraftForge.EVENT_BUS.addListener(KeyInputHandler::onKeyInput);
-		KeyBindings.init();
 		event.enqueueWork(() -> {
 			ItemProperties.register(Registration.KURATSU.get(), new ResourceLocation(HellFall.MODID, "blocking"),
 					(stack, level, living, id) -> {
@@ -23,5 +21,7 @@ public class ClientSetup {
 						return living != null && living.isUsingItem() && living.getUseItem() == stack ? 1.0F : 0.0F;
 					});
 		});
+		MinecraftForge.EVENT_BUS.addListener(KeyInputHandler::onKeyInput);
+		KeyBindings.init();
 	}
 }

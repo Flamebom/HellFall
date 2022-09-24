@@ -1,0 +1,13 @@
+{
+  "item.hellfall.calamity_core": "Calamity Core",
+  "item.hellfall.empty_core": "Empty Core",
+  "item.hellfall.godfall": "Godfall",
+  "item.hellfall.godsend_core": "Godsend Core",
+  "item.hellfall.kuratsu": "Kuratsu",
+  "itemGroup.hellfall": "HellFall",
+  "key.Deflect": "Deflect",
+  "key.categories.hellfall": "HellFall",
+  "message.kuratsu.level": "Level:%s",
+  "message.kuratsu.xp": "XP:%s/100",
+  "message.wip": "Work in Progress, Not yet implamented"
+}

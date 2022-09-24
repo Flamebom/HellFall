@@ -11,12 +11,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
-public class PacketDeflect {
+public class PacketInteraction {
 
-	public PacketDeflect() {
+	public PacketInteraction() {
 	}
 
-	public PacketDeflect(FriendlyByteBuf buf) {
+	public PacketInteraction(FriendlyByteBuf buf) {
 
 	}
 
@@ -34,7 +34,7 @@ public class PacketDeflect {
 				if (tag.getFloat("starttimer") == 0F) {
 					Timer timer = new Timer(player.level);
 					tag.putFloat("startimer", timer.getTime());
-				} else if() {}
+				} //else if() {}
 			}
 		});
 		return true;
