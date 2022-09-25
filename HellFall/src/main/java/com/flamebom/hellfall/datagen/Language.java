@@ -8,8 +8,8 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class Language extends LanguageProvider {
-	public Language(DataGenerator gen) {
-		super(gen, HellFall.MODID, "en_us");
+	public Language(DataGenerator gen, String locale) {
+		super(gen, HellFall.MODID, locale);
 
 	}
 
