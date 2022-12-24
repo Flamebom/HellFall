@@ -13,7 +13,7 @@ public class KeyBindings {
 	public static KeyMapping WeaponInteraction;
 
 	public static void init() {
-		WeaponInteraction = new KeyMapping(KEY_WEAPON_INTERACTION, KeyConflictContext.IN_GAME, InputConstants.getKey(InputConstants.MOUSE_BUTTON_MIDDLE, InputConstants.MOUSE_BUTTON_MIDDLE),
+		WeaponInteraction = new KeyMapping(KEY_WEAPON_INTERACTION, KeyConflictContext.IN_GAME, InputConstants.getKey("key.mouse.middle"),
 				KEY_CATEGORIES_HELLFALL);
 		ClientRegistry.registerKeyBinding(WeaponInteraction);
 	}

@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.flamebom.hellfall.helpers.Timer;
 import com.flamebom.hellfall.items.Kuratsu;
+import com.flamebom.hellfall.items.Was_Spectre;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -29,12 +30,9 @@ public class PacketInteraction {
 			ServerPlayer player = ctx.getSender();
 			ItemStack stack = player.getMainHandItem();
 
-			if (stack.getItem() instanceof Kuratsu) {
-				CompoundTag tag = stack.getOrCreateTag();
-				if (tag.getFloat("starttimer") == 0F) {
-					Timer timer = new Timer(player.level);
-					tag.putFloat("startimer", timer.getTime());
-				} //else if() {}
+			if (stack.getItem() instanceof Was_Spectre) {
+				stack.getOrCreateTag().putBoolean("on", true);
+	Timer tenseconds = new Timer(10,stack);
 			}
 		});
 		return true;

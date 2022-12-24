@@ -48,12 +48,13 @@ public class Was_Spectre extends AxeItem {
 			tag.putInt("currentdamage", 5);
 			tag.putInt("level", 1);
 			tag.putBoolean("init", true);
+			tag.putBoolean("on", false);
 		}
 
 	}
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-		if (attacker instanceof Player) {
+		if (attacker instanceof Player && stack.getOrCreateTag().getBoolean("on") ) {
 			damageupdater(stack, target, attacker);
 		}
 		return super.hurtEnemy(stack, target, attacker);
@@ -70,6 +71,7 @@ public class Was_Spectre extends AxeItem {
 			//player.level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.bowshot,	SoundSource.PLAYERS, 20F, 1F);
 			setXPOfSword(sword, 1);
 		}
+		
 	}
 
 	@Override

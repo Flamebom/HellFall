@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "hellfall:item/was_spectre"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "hellfall:staff_on": 0.0
+      },
+      "model": "hellfall:item/was_spectre"
+    },
+    {
+      "predicate": {
+        "hellfall:staff_on": 1.0
+      },
+      "model": "hellfall:item/was_spectre_on"
+    }
+  ]
+}
